@@ -3,112 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Registro de Rutas</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Registro operadores</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="unidades.html">Registro unidades</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="registro_rutas.html">Registro rutas</a>
+                  </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container">
     <h1>Registro de Rutas</h1>
     
     <form action="registrar_ruta.php" method="post">
-        <label for="operador">Operador:</label>
-        <select name="operador" id="operador" required>
-            <option value="">Seleccionar Operador</option>
-            <!-- Carga dinámica de operadores desde archivo_obtener_operadores.php -->
-        </select><br>
+      <div class="form-group">
+          <label for="operador">Operador:</label>
+          <select class="form-control" name="operador" id="operador" required>
+              <option value="">Seleccionar Operador</option>
+              <!-- Carga dinámica de operadores desde archivo_obtener_operadores.php -->
+          </select>
+      </div>
 
-        <label for="unidad">Unidad:</label>
-        <select name="unidad" id="unidad" required>
-            <option value="">Seleccionar Unidad</option>
-            <!-- Carga dinámica de unidades desde archivo_obtener_unidades.php -->
-        </select><br>
+      <div class="form-group">
+          <label for="unidad">Unidad:</label>
+          <select class="form-control" name="unidad" id="unidad" required>
+              <option value="">Seleccionar Unidad</option>
+              <!-- Carga dinámica de unidades desde archivo_obtener_unidades.php -->
+          </select>
+      </div>
 
-        <!-- Otros campos del formulario -->
-        <label for="lugar_inicio">Lugar de Inicio:</label>
-<select name="lugar_inicio" id="lugar_inicio" required>
-  <option value="" disabled selected>Selecciona un estado</option>
-  <option value="Aguascalientes">Aguascalientes</option>
-  <option value="Baja California">Baja California</option>
-  <option value="Baja California Sur">Baja California Sur</option>
-  <option value="Campeche">Campeche</option>
-  <option value="Chiapas">Chiapas</option>
-  <option value="Chihuahua">Chihuahua</option>
-  <option value="Coahuila">Coahuila</option>
-  <option value="Colima">Colima</option>
-  <option value="Durango">Durango</option>
-  <option value="Guanajuato">Guanajuato</option>
-  <option value="Guerrero">Guerrero</option>
-  <option value="Hidalgo">Hidalgo</option>
-  <option value="Jalisco">Jalisco</option>
-  <option value="México">México</option>
-  <option value="Michoacán">Michoacán</option>
-  <option value="Morelos">Morelos</option>
-  <option value="Nayarit">Nayarit</option>
-  <option value="Nuevo León">Nuevo León</option>
-  <option value="Oaxaca">Oaxaca</option>
-  <option value="Puebla">Puebla</option>
-  <option value="Querétaro">Querétaro</option>
-  <option value="Quintana Roo">Quintana Roo</option>
-  <option value="San Luis Potosí">San Luis Potosí</option>
-  <option value="Sinaloa">Sinaloa</option>
-  <option value="Sonora">Sonora</option>
-  <option value="Tabasco">Tabasco</option>
-  <option value="Tamaulipas">Tamaulipas</option>
-  <option value="Tlaxcala">Tlaxcala</option>
-  <option value="Veracruz">Veracruz</option>
-  <option value="Yucatán">Yucatán</option>
-  <option value="Zacatecas">Zacatecas</option>
-</select><br>
+      <!-- Otros campos del formulario -->
 
-        <label for="lugar_final">Lugar de Finalización:</label>
-        <select name="lugar_final" id="lugar_final" required>
-            <option value="" disabled selected>Selecciona un estado</option>
-  <option value="Aguascalientes">Aguascalientes</option>
-  <option value="Baja California">Baja California</option>
-  <option value="Baja California Sur">Baja California Sur</option>
-  <option value="Campeche">Campeche</option>
-  <option value="Chiapas">Chiapas</option>
-  <option value="Chihuahua">Chihuahua</option>
-  <option value="Coahuila">Coahuila</option>
-  <option value="Colima">Colima</option>
-  <option value="Durango">Durango</option>
-  <option value="Guanajuato">Guanajuato</option>
-  <option value="Guerrero">Guerrero</option>
-  <option value="Hidalgo">Hidalgo</option>
-  <option value="Jalisco">Jalisco</option>
-  <option value="México">México</option>
-  <option value="Michoacán">Michoacán</option>
-  <option value="Morelos">Morelos</option>
-  <option value="Nayarit">Nayarit</option>
-  <option value="Nuevo León">Nuevo León</option>
-  <option value="Oaxaca">Oaxaca</option>
-  <option value="Puebla">Puebla</option>
-  <option value="Querétaro">Querétaro</option>
-  <option value="Quintana Roo">Quintana Roo</option>
-  <option value="San Luis Potosí">San Luis Potosí</option>
-  <option value="Sinaloa">Sinaloa</option>
-  <option value="Sonora">Sonora</option>
-  <option value="Tabasco">Tabasco</option>
-  <option value="Tamaulipas">Tamaulipas</option>
-  <option value="Tlaxcala">Tlaxcala</option>
-  <option value="Veracruz">Veracruz</option>
-  <option value="Yucatán">Yucatán</option>
-  <option value="Zacatecas">Zacatecas</option>
-        </select><br>
+      <div class="form-group">
+          <label for="lugar_inicio">Lugar de Inicio:</label>
+          <select class="form-control" name="lugar_inicio" id="lugar_inicio" required>
+              <option value="" disabled selected>Selecciona un estado</option>
+              <option value="Aguascalientes">Aguascalientes</option>
+              <option value="Baja California">Baja California</option>
+              <option value="Baja California Sur">Baja California Sur</option>
+              <option value="Campeche">Campeche</option>
+              <option value="Chiapas">Chiapas</option>
+              <option value="Chihuahua">Chihuahua</option>
+              <option value="Coahuila">Coahuila</option>
+              <option value="Colima">Colima</option>
+              <option value="Durango">Durango</option>
+              <option value="Guanajuato">Guanajuato</option>
+              <option value="Guerrero">Guerrero</option>
+              <option value="Hidalgo">Hidalgo</option>
+              <option value="Jalisco">Jalisco</option>
+              <option value="México">México</option>
+              <option value="Michoacán">Michoacán</option>
+              <option value="Morelos">Morelos</option>
+              <option value="Nayarit">Nayarit</option>
+              <option value="Nuevo León">Nuevo León</option>
+              <option value="Oaxaca">Oaxaca</option>
+              <option value="Puebla">Puebla</option>
+              <option value="Querétaro">Querétaro</option>
+              <option value="Quintana Roo">Quintana Roo</option>
+              <option value="San Luis Potosí">San Luis Potosí</option>
+              <option value="Sinaloa">Sinaloa</option>
+              <option value="Sonora">Sonora</option>
+              <option value="Tabasco">Tabasco</option>
+              <option value="Tamaulipas">Tamaulipas</option>
+              <option value="Tlaxcala">Tlaxcala</option>
+              <option value="Veracruz">Veracruz</option>
+              <option value="Yucatán">Yucatán</option>
+              <option value="Zacatecas">Zacatecas</option>
+          </select>
+      </div>
 
-        <label for="fecha_inicio">Fecha de Inicio:</label>
-        <input type="date" name="fecha_inicio" id="fecha_inicio" required><br>
+      <div class="form-group">
+          <label for="lugar_final">Lugar de Finalización:</label>
+          <select class="form-control" name="lugar_final" id="lugar_final" required>
+              <option value="" disabled selected>Selecciona un estado</option>
+              <option value="Aguascalientes">Aguascalientes</option>
+              <option value="Baja California">Baja California</option>
+              <option value="Baja California Sur">Baja California Sur</option>
+              <option value="Campeche">Campeche</option>
+              <option value="Chiapas">Chiapas</option>
+              <option value="Chihuahua">Chihuahua</option>
+              <option value="Coahuila">Coahuila</option>
+              <option value="Colima">Colima</option>
+              <option value="Durango">Durango</option>
+              <option value="Guanajuato">Guanajuato</option>
+              <option value="Guerrero">Guerrero</option>
+              <option value="Hidalgo">Hidalgo</option>
+              <option value="Jalisco">Jalisco</option>
+              <option value="México">México</option>
+              <option value="Michoacán">Michoacán</option>
+              <option value="Morelos">Morelos</option>
+              <option value="Nayarit">Nayarit</option>
+              <option value="Nuevo León">Nuevo León</option>
+              <option value="Oaxaca">Oaxaca</option>
+              <option value="Puebla">Puebla</option>
+              <option value="Querétaro">Querétaro</option>
+              <option value="Quintana Roo">Quintana Roo</option>
+              <option value="San Luis Potosí">San Luis Potosí</option>
+              <option value="Sinaloa">Sinaloa</option>
+              <option value="Sonora">Sonora</option>
+              <option value="Tabasco">Tabasco</option>
+              <option value="Tamaulipas">Tamaulipas</option>
+              <option value="Tlaxcala">Tlaxcala</option>
+              <option value="Veracruz">Veracruz</option>
+              <option value="Yucatán">Yucatán</option>
+              <option value="Zacatecas">Zacatecas</option>
+          </select>
+      </div>
 
-        <label for="fecha_final">Fecha de Finalización:</label>
-        <input type="date" name="fecha_final" id="fecha_final" required><br>
+      <div class="form-group">
+          <label for="fecha_inicio">Fecha de Inicio:</label>
+          <input class="form-control" type="date" name="fecha_inicio" id="fecha_inicio" required>
+      </div>
 
-        <label for="kilometraje_inicial">Kilometraje Inicial:</label>
-        <input type="number" name="kilometraje_inicial" id="kilometraje_inicial" required><br>
+      <div class="form-group">
+          <label for="fecha_final">Fecha de Finalización:</label>
+          <input class="form-control" type="date" name="fecha_final" id="fecha_final" required>
+      </div>
 
-        <label for="kilometraje_final">Kilometraje Final:</label>
-        <input type="number" name="kilometraje_final" id="kilometraje_final" required><br>
+      <div class="form-group">
+          <label for="kilometraje_inicial">Kilometraje Inicial:</label>
+          <input class="form-control" type="number" name="kilometraje_inicial" id="kilometraje_inicial" required>
+      </div>
+
+      <div class="form-group">
+          <label for="kilometraje_final">Kilometraje Final:</label>
+          <input class="form-control" type="number" name="kilometraje_final" id="kilometraje_final" required>
+      </div>
+
+      <div class="form-group">
+        <label for="observaciones">Observaciones:</label>
+        <textarea class="form-control" name="observaciones" id="observaciones" rows="3"></textarea>
+      </div>
+
+      <br>
+      <input type="submit" class="btn btn-primary" value="Registrar Ruta">
+  </form>
 
 
-        <input type="submit" value="Registrar Ruta">
-    </form>
+  <table id="tablaRutas" class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <th>ID ruta</th>
+            <th>Operador</th>
+            <th>Unidad Tipo</th>
+            <th>Unidad Placa</th>
+            <th>Lugar Inicio</th>
+            <th>Lugar Final</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Final</th>
+            <th>Kilometraje Inicial</th>
+            <th>Kilometraje Final</th>
+            <th>Kilometraje Recorrido</th>
+            <th>Observaciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Datos de rutas se cargarán aquí usando JavaScript -->
+    </tbody>
+</table>
+</div>
+      </div>
+
+      
 
     <!-- Script JavaScript para cálculos de kilometraje recorrido -->
     <script>
@@ -145,6 +220,40 @@
                     unidadSelect.appendChild(option);
                 });
             });
+
+
+            function cargarDatosRutas() {
+        fetch("archivo_lista_rutas.php")
+            .then(response => response.json())
+            .then(data => {
+                const tablaRutas = document.getElementById("tablaRutas").querySelector("tbody");
+
+                data.forEach(ruta => {
+                    const fila = document.createElement("tr");
+                    fila.innerHTML = `
+                        <td>${ruta.id}</td>
+                        <td>${ruta.operador_nombre} ${ruta.apellido_paterno} ${ruta.apellido_materno}</td>
+                        <td>${ruta.unidad_tipo}</td>
+                        <td>${ruta.unidad_placa}</td>
+                        <td>${ruta.lugar_inicio}</td>
+                        <td>${ruta.lugar_final}</td>
+                        <td>${ruta.fecha_inicio}</td>
+                        <td>${ruta.fecha_final}</td>
+                        <td>${ruta.kilometraje_inicial}</td>
+                        <td>${ruta.kilometraje_final}</td>
+                        <td>${ruta.kilometraje_recorrido}</td>
+                        <td>${ruta.observaciones}</td>
+                    `;
+                    tablaRutas.appendChild(fila);
+                });
+            })
+            .catch(error => {
+                console.error("Error al cargar los datos de rutas:", error);
+            });
+    }
+
+    // Llamar a la función para cargar datos al cargar la página
+    cargarDatosRutas();
     </script>
 </body>
 </html>

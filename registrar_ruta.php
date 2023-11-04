@@ -21,11 +21,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fecha_final = $_POST["fecha_final"];
     $kilometraje_inicial = $_POST["kilometraje_inicial"];
     $kilometraje_final = $_POST["kilometraje_final"];
-    $kilometraje_recorrido = $kilometraje_final - $kilometraje_inicial;
+    $observaciones = $_POST["observaciones"];
 
+
+    $kilometraje_recorrido = $kilometraje_final - $kilometraje_inicial;
+    
     // Insertar los datos en la tabla de rutas
-    $sql = "INSERT INTO rutas (operador_id, unidad_id, lugar_inicio, lugar_final, fecha_inicio, fecha_final, kilometraje_inicial, kilometraje_final, kilometraje_recorrido)
-            VALUES ($operador_id, $unidad_id, '$lugar_inicio', '$lugar_final', '$fecha_inicio', '$fecha_final', $kilometraje_inicial, $kilometraje_final, $kilometraje_recorrido)";
+    $sql = "INSERT INTO rutas (operador_id, unidad_id, lugar_inicio, lugar_final, fecha_inicio, fecha_final, kilometraje_inicial, kilometraje_final, kilometraje_recorrido, observaciones)
+        VALUES ($operador_id, $unidad_id, '$lugar_inicio', '$lugar_final', '$fecha_inicio', '$fecha_final', $kilometraje_inicial, $kilometraje_final, $kilometraje_recorrido, '$observaciones')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Registro de ruta exitoso";
