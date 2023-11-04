@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Rutas</title>
+</head>
+<body>
+    <h1>Registro de Rutas</h1>
+    
+    <form action="registrar_ruta.php" method="post">
+        <label for="operador">Operador:</label>
+        <select name="operador" id="operador" required>
+            <option value="">Seleccionar Operador</option>
+            <!-- Carga dinámica de operadores desde archivo_obtener_operadores.php -->
+        </select><br>
+
+        <label for="unidad">Unidad:</label>
+        <select name="unidad" id="unidad" required>
+            <option value="">Seleccionar Unidad</option>
+            <!-- Carga dinámica de unidades desde archivo_obtener_unidades.php -->
+        </select><br>
+
+        <!-- Otros campos del formulario -->
+        <label for="lugar_inicio">Lugar de Inicio:</label>
+<select name="lugar_inicio" id="lugar_inicio" required>
+  <option value="" disabled selected>Selecciona un estado</option>
+  <option value="Aguascalientes">Aguascalientes</option>
+  <option value="Baja California">Baja California</option>
+  <option value="Baja California Sur">Baja California Sur</option>
+  <option value="Campeche">Campeche</option>
+  <option value="Chiapas">Chiapas</option>
+  <option value="Chihuahua">Chihuahua</option>
+  <option value="Coahuila">Coahuila</option>
+  <option value="Colima">Colima</option>
+  <option value="Durango">Durango</option>
+  <option value="Guanajuato">Guanajuato</option>
+  <option value="Guerrero">Guerrero</option>
+  <option value="Hidalgo">Hidalgo</option>
+  <option value="Jalisco">Jalisco</option>
+  <option value="México">México</option>
+  <option value="Michoacán">Michoacán</option>
+  <option value="Morelos">Morelos</option>
+  <option value="Nayarit">Nayarit</option>
+  <option value="Nuevo León">Nuevo León</option>
+  <option value="Oaxaca">Oaxaca</option>
+  <option value="Puebla">Puebla</option>
+  <option value="Querétaro">Querétaro</option>
+  <option value="Quintana Roo">Quintana Roo</option>
+  <option value="San Luis Potosí">San Luis Potosí</option>
+  <option value="Sinaloa">Sinaloa</option>
+  <option value="Sonora">Sonora</option>
+  <option value="Tabasco">Tabasco</option>
+  <option value="Tamaulipas">Tamaulipas</option>
+  <option value="Tlaxcala">Tlaxcala</option>
+  <option value="Veracruz">Veracruz</option>
+  <option value="Yucatán">Yucatán</option>
+  <option value="Zacatecas">Zacatecas</option>
+</select><br>
+
+        <label for="lugar_final">Lugar de Finalización:</label>
+        <select name="lugar_final" id="lugar_final" required>
+            <option value="" disabled selected>Selecciona un estado</option>
+  <option value="Aguascalientes">Aguascalientes</option>
+  <option value="Baja California">Baja California</option>
+  <option value="Baja California Sur">Baja California Sur</option>
+  <option value="Campeche">Campeche</option>
+  <option value="Chiapas">Chiapas</option>
+  <option value="Chihuahua">Chihuahua</option>
+  <option value="Coahuila">Coahuila</option>
+  <option value="Colima">Colima</option>
+  <option value="Durango">Durango</option>
+  <option value="Guanajuato">Guanajuato</option>
+  <option value="Guerrero">Guerrero</option>
+  <option value="Hidalgo">Hidalgo</option>
+  <option value="Jalisco">Jalisco</option>
+  <option value="México">México</option>
+  <option value="Michoacán">Michoacán</option>
+  <option value="Morelos">Morelos</option>
+  <option value="Nayarit">Nayarit</option>
+  <option value="Nuevo León">Nuevo León</option>
+  <option value="Oaxaca">Oaxaca</option>
+  <option value="Puebla">Puebla</option>
+  <option value="Querétaro">Querétaro</option>
+  <option value="Quintana Roo">Quintana Roo</option>
+  <option value="San Luis Potosí">San Luis Potosí</option>
+  <option value="Sinaloa">Sinaloa</option>
+  <option value="Sonora">Sonora</option>
+  <option value="Tabasco">Tabasco</option>
+  <option value="Tamaulipas">Tamaulipas</option>
+  <option value="Tlaxcala">Tlaxcala</option>
+  <option value="Veracruz">Veracruz</option>
+  <option value="Yucatán">Yucatán</option>
+  <option value="Zacatecas">Zacatecas</option>
+        </select><br>
+
+        <label for="fecha_inicio">Fecha de Inicio:</label>
+        <input type="date" name="fecha_inicio" id="fecha_inicio" required><br>
+
+        <label for="fecha_final">Fecha de Finalización:</label>
+        <input type="date" name="fecha_final" id="fecha_final" required><br>
+
+        <label for="kilometraje_inicial">Kilometraje Inicial:</label>
+        <input type="number" name="kilometraje_inicial" id="kilometraje_inicial" required><br>
+
+        <label for="kilometraje_final">Kilometraje Final:</label>
+        <input type="number" name="kilometraje_final" id="kilometraje_final" required><br>
+
+
+        <input type="submit" value="Registrar Ruta">
+    </form>
+
+    <!-- Script JavaScript para cálculos de kilometraje recorrido -->
+    <script>
+        document.getElementById("kilometraje_inicial").addEventListener("change", function() {
+            // Realizar cálculos y actualizar el kilometraje recorrido
+            var kilometrajeInicial = parseFloat(this.value);
+            var kilometrajeFinal = parseFloat(document.getElementById("kilometraje_final").value);
+            var kilometrajeRecorrido = kilometrajeFinal - kilometrajeInicial;
+
+            document.getElementById("kilometraje_recorrido").value = isNaN(kilometrajeRecorrido) ? "" : kilometrajeRecorrido;
+        });
+        // Cargar la lista de operadores desde archivo_obtener_operadores.php
+        fetch("archivo_obtener_operadores.php")
+            .then(response => response.json())
+            .then(data => {
+                const operadorSelect = document.getElementById("operador");
+                data.forEach(operador => {
+                    const option = document.createElement("option");
+                    option.value = operador.id;
+                    option.textContent = operador.nombre;
+                    operadorSelect.appendChild(option);
+                });
+            });
+
+        // Cargar la lista de unidades desde archivo_obtener_unidades.php
+        fetch("archivo_obtener_unidades.php")
+            .then(response => response.json())
+            .then(data => {
+                const unidadSelect = document.getElementById("unidad");
+                data.forEach(unidad => {
+                    const option = document.createElement("option");
+                    option.value = unidad.id;
+                    option.textContent = unidad.descripcion;
+                    unidadSelect.appendChild(option);
+                });
+            });
+    </script>
+</body>
+</html>
