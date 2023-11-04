@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Unidades</title>
+
+</head>
+<body>
+    <h1>Registro de Unidades</h1>
+    <form action="registrar_unidad.php" method="post">
+        <label for="tipo">Tipo:</label>
+        <select name="tipo" id="tipo" required>
+            <option value="tractocamion">Tractocamion</option>
+            <option value="caja_seca">Caja Seca</option>
+        </select><br>
+
+        <label for="marca">Marca:</label>
+        <input type="text" name="marca" id="marca" required><br>
+
+        <label for="modelo">Modelo:</label>
+        <input type="text" name="modelo" id="modelo" required><br>
+
+        <label for="anio">Año:</label>
+        <input type="number" name="anio" id="anio" required><br>
+
+        <label for="placa">Placa:</label>
+        <input type="text" name="placa" id="placa" required><br>
+
+        <label for="sku">SKU (Código):</label>
+        <input type="text" name="sku" id="sku" required><br>
+        
+        <label for="kilometraje">Kilometraje:</label>
+        <input type="number" name="kilometraje" id="kilometraje" required><br>
+
+
+        <input type="submit" value="Registrar">
+    </form>
+
+    <ul id="listaUnidades"></ul>
+</body>
+<script>
+    // Cargar unidades existentes al cargar la página
+    window.addEventListener("load", function() {
+        fetch("cargar_unidades.php") // Ruta al archivo PHP que carga las unidades
+            .then(response => response.json())
+            .then(data => {
+                const listaUnidades = document.getElementById("listaUnidades");
+                data.forEach(unidad => {
+                    const li = document.createElement("li");
+                    li.textContent = `Tipo: ${unidad.tipo}, Marca: ${unidad.marca}, Modelo: ${unidad.modelo}, Año: ${unidad.anio}, Placa: ${unidad.placa}, SKU: ${unidad.sku}, kilometraje: ${unidad.kilometraje}`;
+                    listaUnidades.appendChild(li);
+                });
+            });
+    });
+</script>
+</html>
