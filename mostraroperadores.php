@@ -12,16 +12,18 @@ if ($conn->connect_error) {
 }
 
 // Consulta para obtener registros existentes
-$sql = "SELECT * FROM operadores";
+$sql = "SELECT id, nombres, apellido_paterno, apellido_materno, edad, numero_telefonico, fotografia FROM operadores";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<h2>Registros existentes:</h2>";
-    echo "<ul>";
     while ($row = $result->fetch_assoc()) {
-        echo "<li>{$row['nombres']} {$row['apellido_paterno']} {$row['apellido_materno']} - Edad: {$row['edad']} - Teléfono: {$row['numero_telefonico']}</li>";
+        $imagenBase64 = base64_encode($row['fotografia']); // Convierte la imagen a base64
+        $imagenSrc = "data:image/jpeg;base64," . $imagenBase64; // Asume que la imagen es JPEG; ajusta el tipo de imagen según sea necesario
+
+        // Imprime la información y la imagen
+        echo "<li>{$row['nombres']} {$row['apellido_paterno']} {$row['apellido_materno']} - Edad: {$row['edad']} - Teléfono: {$row['numero_telefonico']}<br>";
+        echo "<img src='$imagenSrc' alt='Fotografía'></li>";
     }
-    echo "</ul>";
 } else {
     echo "No hay registros.";
 }

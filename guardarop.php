@@ -16,12 +16,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombres = $_POST["nombres"];
     $apellido_paterno = $_POST["apellido_paterno"];
     $apellido_materno = $_POST["apellido_materno"];
-    $fotografia = $_POST["fotografia"];
     $edad = $_POST["edad"];
     $numero_telefonico = $_POST["numero_telefonico"];
 
+
+    // Procesar la imagen
+    if (isset($_FILES["fotografia"])) {
+        $imageData = file_get_contents($_FILES["fotografia"]["tmp_name"]);
+        $imageData = $conn->real_escape_string($imageData); // Escapar el contenido de la imagen para evitar problemas de seguridad
+    } else {
+        // Manejar el caso si no se proporciona una imagen
+        $imageData = null;
+    }
+
     // Insertar los datos en la base de datos
-    $sql = "INSERT INTO operadores (nombres, apellido_paterno, apellido_materno, fotografia, edad, numero_telefonico) VALUES ('$nombres', '$apellido_paterno', '$apellido_materno', '$fotografia', $edad, '$numero_telefonico')";
+    
+    $sql = "INSERT INTO operadores (nombres, apellido_paterno, apellido_materno, fotografia, edad, numero_telefonico) VALUES ('$nombres', '$apellido_paterno', '$apellido_materno', '$imageData', $edad, '$numero_telefonico')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Registro exitoso";
