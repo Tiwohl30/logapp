@@ -26,10 +26,14 @@
               <li class="nav-item">
                 <a class="nav-link active" href="registro_rutas.html">Registro rutas</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="mantenimiento.php">Mantenimientos</a>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
+
     <div class="container">
         <h1 class="mt-5">Registro de Unidades</h1>
         <form action="registrar_unidad.php" method="post">
@@ -69,8 +73,11 @@
             <div class="form-group">
                 <label for="kilometraje">Kilometraje:</label>
                 <input class="form-control" type="number" name="kilometraje" id="kilometraje" required>
-            </div>
 
+                <input type="hidden" name="kilometraje_recorrido" id="kilometraje_recorrido">
+
+            </div>
+<br><br>
             <input type="submit" class="btn btn-primary" value="Registrar">
         </form>
 
@@ -84,7 +91,8 @@
                         <th>Año</th>
                         <th>Placa</th>
                         <th>SKU (Código)</th>
-                        <th>Kilometraje</th>
+                        <th>Kilometraje total</th>
+                        <th>Kilometraje recorrido</th>
                     </tr>
                 </thead>
                 <tbody id="listaUnidades">
@@ -125,6 +133,9 @@
                     const kilometrajeCell = document.createElement("td");
                     kilometrajeCell.textContent = unidad.kilometraje;
 
+                    const kilometraje_recorridoCell = document.createElement("td");
+                    kilometraje_recorridoCell.textContent = unidad.kilometraje_recorrido;
+
                     // Agregar las celdas a la fila
                     row.appendChild(tipoCell);
                     row.appendChild(marcaCell);
@@ -133,6 +144,7 @@
                     row.appendChild(placaCell);
                     row.appendChild(skuCell);
                     row.appendChild(kilometrajeCell);
+                    row.appendChild(kilometraje_recorridoCell);
 
                     // Agregar la fila a la tabla
                     listaUnidades.appendChild(row);

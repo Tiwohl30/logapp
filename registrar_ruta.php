@@ -29,12 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insertar los datos en la tabla de rutas
     $sql = "INSERT INTO rutas (operador_id, unidad_id, lugar_inicio, lugar_final, fecha_inicio, fecha_final, kilometraje_inicial, kilometraje_final, kilometraje_recorrido, observaciones)
         VALUES ($operador_id, $unidad_id, '$lugar_inicio', '$lugar_final', '$fecha_inicio', '$fecha_final', $kilometraje_inicial, $kilometraje_final, $kilometraje_recorrido, '$observaciones')";
+$sqlUnidades = "UPDATE unidades SET kilometraje_recorrido = kilometraje_recorrido + $kilometraje_recorrido, kilometraje = $kilometraje_final WHERE id = $unidad_id";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Registro de ruta exitoso";
-    } else {
-        echo "Error al registrar la ruta: " . $conn->error;
-    }
+
+if ($conn->query($sql) === TRUE && $conn->query($sqlUnidades) === TRUE) {
+    echo "Registro de ruta exitoso";
+} else {
+    echo "Error al registrar la ruta: " . $conn->error;
+}
 
     $conn->close();
 }
