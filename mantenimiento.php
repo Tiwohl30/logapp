@@ -69,6 +69,12 @@ $conn->close();
           <li class="nav-item">
             <a class="nav-link active" href="mantenimiento.php">Mantenimientos</a>
           </li>
+          <li class="nav-item">
+                    <a class="nav-link active" href="neumaticos.php">Registro Neumáticos</a>
+        </li>
+        <li class="nav-item">
+                <a class="nav-link active" href="listallantas.html">Listado de neumaticos</a>
+            </li>
         </ul>
       </div>
     </div>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Llantas</title>
+    <!-- Incluye Bootstrap y jQuery -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Consulta de Llantas por Unidad</h2>
+
+    <form id="consultaForm">
+        <div class="form-group">
+            <label for="unidad">Selecciona una unidad:</label>
+            <select id="unidad" name="unidad" class="form-control"></select>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="consultarLlantas()">Consultar Llantas</button>
+    </form>
+
+    <h3 class="mt-4">Llantas Relacionadas:</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered mt-2">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha Adquisición</th>
+                    <th>Kilómetros Recorridos</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tablaLlantas"></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal para editar llanta -->
+<div class="modal" id="editarLlantaModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Cabecera del Modal -->
+            <div class="modal-header">
+                <h4 class="modal-title">Editar Llanta</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Cuerpo del Modal -->
+            <div class="modal-body">
+                <form id="editarLlantaForm">
+                    <div class="form-group">
+                        <label for="nuevaFecha">Nueva Fecha de Adquisición:</label>
+                        <input type="date" class="form-control" id="nuevaFecha" name="nuevaFecha" required>
+                    </div>
+                    <!-- Agregamos un campo oculto para almacenar el ID de la llanta -->
+                    <input type="hidden" id="llantaId" name="llantaId" value="">
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Cargar unidades al cargar la página
+    $(document).ready(function() {
+        cargarUnidades();
+    });
+
+    // Cargar unidades desde el servidor
+    function cargarUnidades() {
+        $.ajax({
+            url: 'obtener_unidades.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                // Llenar el dropdown de unidades
+                var dropdown = $('#unidad');
+                dropdown.empty();
+                $.each(data, function(index, item) {
+                    dropdown.append($('<option></option>').attr('value', item.id).text(item.placa));
+                });
+            },
+            error: function(error) {
+                console.error('Error al cargar unidades: ', error);
+            }
+        });
+    }
+
+    // Consultar y mostrar llantas al seleccionar una unidad
+    function consultarLlantas() {
+        var unidadId = $('#unidad').val();
+        $.ajax({
+            url: 'obtener_llantas.php',
+            type: 'POST',
+            data: { unidad: unidadId },
+            dataType: 'json',
+            success: function(data) {
+                // Limpiar la tabla antes de agregar nuevas filas
+                $('#tablaLlantas').empty();
+
+                // Agregar filas a la tabla
+                $.each(data, function(index, item) {
+                    var row = $('<tr></tr>');
+                    row.append('<td>' + item.id + '</td>');
+                    row.append('<td>' + item.fechaAdquisicion + '</td>');
+                    row.append('<td>' + item.kilometrosRecorridos + '</td>');
+                    row.append('<td><button class="btn btn-primary editar-llanta-btn" data-id="' + item.id + '">Editar</button></td>');
+                    $('#tablaLlantas').append(row);
+                });
+            },
+            error: function(error) {
+                console.error('Error al cargar llantas: ', error);
+            }
+        });
+    }
+
+    
+    // Abrir modal al hacer clic en el botón de editar
+    $(document).on('click', '.editar-llanta-btn', function() {
+        var llantaId = $(this).data('id');
+        // Llenamos el campo oculto con el ID de la llanta
+        $('#llantaId').val(llantaId);
+        $('#editarLlantaModal').modal('show');
+        // Puedes agregar aquí la lógica para llenar el formulario con los datos de la llanta seleccionada
+        // Puedes obtener los datos de la llanta haciendo otra solicitud al servidor
+    });
+
+    // Evento para enviar el formulario de edición
+    $('#editarLlantaForm').submit(function(event) {
+        event.preventDefault();
+        var nuevaFecha = $('#nuevaFecha').val();
+        var llantaId = $('#llantaId').val();
+        $.ajax({
+            url: 'editar_llantas.php',
+            type: 'POST',
+            data: { llantaId: llantaId, nuevaFecha: nuevaFecha },
+            success: function(response) {
+                console.log(response);
+                // Aquí puedes agregar lógica adicional después de la edición exitosa
+                // Por ejemplo, cerrar el modal y recargar la lista de llantas
+                $('#editarLlantaModal').modal('hide');
+                consultarLlantas(); // Recargar la lista de llantas
+            },
+            error: function(error) {
+                console.error('Error en la edición: ', error);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
