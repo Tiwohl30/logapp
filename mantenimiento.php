@@ -48,6 +48,31 @@ $conn->close();
     <title>Registro de Mantenimientos</title>
 </head>
 <body>
+    
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Registro operadores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="unidades.html">Registro unidades</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="registro_rutas.html">Registro rutas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="mantenimiento.php">Mantenimientos</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
     <!-- ... (otros elementos HTML) ... -->
     <div class="container">
         <h1 class="mt-5">Calcular Estado de Mantenimiento</h1>
@@ -63,6 +88,7 @@ $conn->close();
                         <th>Primer Mantenimiento Tipo 1</th>
                         <th>Segundo Mantenimiento Tipo 1</th>
                         <th>Primer Mantenimiento Tipo 2</th>
+                        <th>Restablecer Mantenimientos</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,6 +102,12 @@ $conn->close();
                             <td><?= $unidad['primer_mantenimiento_tipo_1'] ? 'Realizado' : 'Pendiente' ?></td>
                             <td><?= $unidad['segundo_mantenimiento_tipo_1'] ? 'Realizado' : 'Pendiente' ?></td>
                             <td><?= $unidad['primer_mantenimiento_tipo_2'] ? 'Realizado' : 'Pendiente' ?></td>
+                            <td>
+                             <form method="POST" action="restablecer_mantenimientos.php">
+                            <input type="hidden" name="unidadId" value="<?= $unidad['id'] ?>">
+                            <button type="submit" class="btn btn-warning" name="restablecerMantenimientos">Restablecer</button>
+                            </form>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
